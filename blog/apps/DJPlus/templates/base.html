@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="stylesheet" href="/media/simple.css" type="text/css"> 
+<title>My weblog {% block title %}{% endblock %}</title>
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+<div id="header" class="header">
+<h1><a href="{% url DJPlus_entry_archive_index %}">Joe's WebLog</a> | <a href="{% url DJPlus_entry_archive_index %}"> Home </a> | <a href="{% url DJPlus_link_archive_index %}"> LinkLog </a>| <a href="http://www.github.com/joelewis"> Code </a></h1>
+</div>
+<div id="content"  class="content">
+{% block content %}
+{% endblock %}
+</div>
+<div id="sidebar">
+<h3>Where Are You?</h3>
+<ul class="nav">
+<li id="main-nav-entries">
+	<a href="{% url DJPlus_entry_archive_index %}">Posts</a>
+	<ul id="main-nav-year">
+		{% for i in month_list %}
+		<li> <a href="{% url DJPlus_entry_archive_month i|date:'Y',i|date:'b' %}">{{ i|date:"F"}}({{ i|date:"Y" }})</li>
+		{% endfor %}
+	</ul>
+</li>
+<li id="main-nav-links">
+<a href="{% url DJPlus_link_archive_index %}">Links</a>
+</li>
+<li id="main-nav-categories">
+<a href="{% url DJPlus_entry_archive_index %}">Categories</a>
+<ul id="main-nav-cat">
+	{% for i in category_list %}
+	<li><a href="{% url DJPlus.views.category_detail i.slug %}">{{ i.title }} </a></li>
+	{% endfor %}
+</ul>
+</li>
+<li id="main-nav-tags">
+<a href="{% url DJPlus_entry_archive_index %}">Tags</a>
+<ul id="main-nav-tag">
+	{% for i in tag_list %}
+	<li><a href="{% url DJPlus.views.tag_detail i.name %}">{{ i.name }}</a></li>
+	{% endfor %}
+</ul>
+</li>
+</ul>
+<span id="whatis">
+<h3 >What is this?</h3>
+{% block whatis %}
+
+{% endblock %}
+</span>
+</div>
+</body>
+</html>
