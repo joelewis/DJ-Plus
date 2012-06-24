@@ -130,6 +130,7 @@ INSTALLED_APPS = (
      'grappelli',
      'django.contrib.admin',
      'tagging',
+     'markdown',
      'DJPlus',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
